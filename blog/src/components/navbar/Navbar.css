@@ -1,0 +1,26 @@
+header{
+    display: flex;
+    justify-content: space-between;
+}
+
+header a{
+    text-decoration: none;
+    color: inherit;
+}
+
+header a.logo{
+    font-weight: bold;
+}
+header nav{
+    display: flex;
+    gap: 15px;
+}
+
+.abc{
+    width: 250px;
+    height: 30px;
+    display: flex;
+    gap: 15px;
+    background-color: blue;
+    justify-content: center;
+}
