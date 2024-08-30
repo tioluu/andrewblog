@@ -1,0 +1,32 @@
+/* src/Footer.css */
+.footer {
+    background-color: blueviolet; /* Consistent with the navbar */
+    color: #020202;
+    padding: 1rem;
+    text-align: center; /* Center the text */
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center items */
+  }
+  
+  .social-links {
+    margin-top: 0.5rem;
+  }
+  
+  .social-links a {
+    color: #1a1917; /* Yellowish color for the links */
+    margin: 0 10px; /* Space out links */
+    transition: color 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    color: #eaee0e; /* Change color on hover */
+  }
+  
+  .social-links a svg {
+    font-size: 24px; /* Adjust the size of the icons */
+  }
+  
