@@ -4,6 +4,7 @@ import './Navbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import mouthlogo from '../../assets/mouthlogo.png'
+import { Link } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -18,24 +19,24 @@ const Navbar = () => {
     <nav className="navbar">
       <div className='navbar-brand'>
         <img src={mouthlogo} alt='' />
-        <a href='' className='logo-text'>raMbleonAndrew</a>
+        <Link to="/" className='logo-text'>raMbleonAndrew</Link>
       </div>
 
       <div className="menu-icon" onClick={toggleMenu}>
-      <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
+        <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
       </div>
       <ul className={`navbar-nav ${isOpen ? 'active' : ''}`}>
         <li className="nav-item">
-          <a href="/">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li className="nav-item">
-          <a href="/about">About</a>
+          <Link to="/About">About</Link>
         </li>
         <li className="nav-item">
-          <a href="/blog">Blog</a>
+          <Link to="/blog">Blog</Link>
         </li>
         <li className="nav-item">
-          <a href="/contact">Contact</a>
+          <Link to="/contact">Contact</Link>
         </li>
       </ul>
     </nav>
