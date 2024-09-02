@@ -1,0 +1,58 @@
+// src/BlogPosts.js
+import React, { useState } from 'react';
+import { useQuery, gql } from '@apollo/client';
+import { RichText } from '@graphcms/rich-text-react-renderer';
+import FullPost from '../Fullposts/FullPost';
+import './Blogposts.css';
+
+const GET_BLOG_POSTS = gql`
+  {
+    posts {
+      id
+      title
+      excerpt
+      createdAt
+      content {
+        raw
+      }
+    }
+  }
+`;
+
+const BlogPosts = () => {
+  const { loading, error, data } = useQuery(GET_BLOG_POSTS);
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  const handleClick = (post) => {
+    setSelectedPost(post); // Set the selected post state
+  };
+
+  const handleBack = () => {
+    setSelectedPost(null); // Reset the selected post when going back
+  };
+
+  if (loading) return <p className="loading">Loading...</p>;
+  if (error) return <p className="error">Error fetching posts: {error.message}</p>;
+
+  return (
+    <div className="blog-posts-container">
+      {selectedPost ? (
+        <FullPost post={selectedPost} onBack={handleBack} />
+      ) : (
+        <>
+          <h1 className="blog-posts-title">Blog Posts</h1>
+          <div className="blog-posts-list">
+            {data.posts.map(post => (
+              <div key={post.id} className="blog-post-item" onClick={() => handleClick(post)}>
+                <h2 className="blog-post-item-title">{post.title}</h2>
+                <p className="blog-post-item-excerpt">{post.excerpt}</p>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default BlogPosts;
