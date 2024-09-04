@@ -11,7 +11,8 @@
   .about-title {
     font-size: 2.5rem;    /* Large font size for title */
     margin-bottom: 20px;  /* Space below the title */
-    color: #333;          /* Dark text color */
+    color: black;
+    text-align: center;
   }
   
   .about-subtitle {
@@ -24,7 +25,7 @@
   .about-paragraph {
     font-size: 1.2rem;    /* Slightly larger font size for paragraphs */
     line-height: 1.6;     /* Spacing between lines */
-    color: #666;          /* Gray text color */
+    color: black;          /* Gray text color */
     margin-bottom: 15px;  /* Space below each paragraph */
   }
   

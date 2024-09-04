@@ -7,7 +7,7 @@ const About = () => {
         <div className="about-container">
             <h1 className="about-title">About Me</h1>
             <p className="about-paragraph">
-                Welcome to my little corner of the internet, where I ramble about movies, data science, and the occasional existential crisis. I'm Andrew, a hopeless romantic with a penchant for depressing films and a love for Wong Kar-wai that borders on unhealthy.
+                Welcome to my little corner of the internet, where I ramble about movies, my career, and the occasional existential crisis. I'm Andrew, a hopeless romantic with a penchant for depressing films and a love for Wong Kar-wai that borders on unhealthy.
             </p>
             <p className="about-paragraph">
                 By day, I'm a developer who spends more time debugging code than actually writing it. But in my heart, I'm a frustrated film critic, constantly analyzing the emotional depth of every frame and wondering if I could have done it better. (Spoiler alert: I couldn't.)

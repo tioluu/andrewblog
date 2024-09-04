@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { motion, AnimatePresence } from 'framer-motion';
 import Body from './components/Body/Body';
 import About from './pages/About/About'; // Make sure to create this file
 import Navbar from './components/navbar/Navbar';

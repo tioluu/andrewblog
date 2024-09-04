@@ -1,14 +1,16 @@
 main {
   padding: 10px;
-  max-width: 1366px;
+  max-width: 1200px;
   margin: 0 auto;
-  font-family: "Anek Devanagari", sans-serif;
-  font-weight: 500;
   background-color: black;
+  font-family: "Reddit Sans Condensed", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 body {
-  color: #222;
+  color: black;
   height: 100%;
 }
 

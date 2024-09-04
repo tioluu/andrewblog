@@ -3,8 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #ffcc00;
-    border-radius: 40%;
+    background: linear-gradient(to right,  #f4f5ef, #e1ecaa);
 }
 
 .navbar-brand {
