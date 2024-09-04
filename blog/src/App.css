@@ -1,9 +1,10 @@
 main {
   padding: 10px;
-  max-width: 1200px;
+  max-width: 1366px;
   margin: 0 auto;
   font-family: "Anek Devanagari", sans-serif;
   font-weight: 500;
+  background-color: black;
 }
 
 body {

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { RichText } from '@graphcms/rich-text-react-renderer';
-import FullPost from '../Fullposts/FullPost';
+import FullPost from '../Fullposts/FullPost'; // Import the new component
 import './Blogposts.css';
 
 const GET_BLOG_POSTS = gql`
@@ -14,6 +14,9 @@ const GET_BLOG_POSTS = gql`
       createdAt
       content {
         raw
+      }
+      featuredImage {  
+        url
       }
     }
   }
@@ -44,6 +47,13 @@ const BlogPosts = () => {
           <div className="blog-posts-list">
             {data.posts.map(post => (
               <div key={post.id} className="blog-post-item" onClick={() => handleClick(post)}>
+                {post.featuredImage && (  // Check if the featuredImage exists before rendering
+                  <img 
+                    src={post.featuredImage.url} 
+                    alt={post.featuredImage.altText} 
+                    className="blog-post-item-image" 
+                  />
+                )}
                 <h2 className="blog-post-item-title">{post.title}</h2>
                 <p className="blog-post-item-excerpt">{post.excerpt}</p>
               </div>

@@ -3,6 +3,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
+    background-color: #ffcc00;
+    border-radius: 40%;
 }
 
 .navbar-brand {
@@ -10,7 +12,7 @@
 }
 
 .navbar-brand a {
-    color: #050505;
+    color: #070707;
     text-decoration: none;
     font-size: 1.5rem;
     font-family: "Shadows Into Light", cursive;

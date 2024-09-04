@@ -1,7 +1,7 @@
 /* src/Footer.css */
 .footer {
-    background-color: blueviolet; /* Consistent with the navbar */
-    color: #020202;
+    background-color: #bab25b; /* Consistent with the navbar */
+    color: #bab25b;
     padding: 1rem;
     text-align: center; /* Center the text */
   }

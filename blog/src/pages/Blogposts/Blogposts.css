@@ -50,3 +50,11 @@
     margin-top: 10px; /* Space between excerpt and content */
   }
   
+  .blog-post-item-image {
+    width: 100%; /* Responsive width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners for images */
+    margin-bottom: 10px; /* Space below image */
+  }
+  
+  
