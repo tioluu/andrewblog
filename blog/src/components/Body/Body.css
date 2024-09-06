@@ -44,7 +44,7 @@
 }
 
 .recent-posts-container {
-    background-color: #cea728;
+    background-color: inherit;
     /* Light grey background for posts */
     padding: 20px;
     border-radius: 12px;

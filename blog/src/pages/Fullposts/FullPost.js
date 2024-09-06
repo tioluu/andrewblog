@@ -9,6 +9,7 @@ const FullPost = ({ post, onBack }) => {
   return (
     <div className="full-post-container">
       <button className="back-button" onClick={onBack}>Back</button>
+      <img className='full-post-image' src={post.featuredImage.url}/>
       <h1 className="full-post-title">{post.title}</h1>
       <p className="full-post-date">{new Date(post.createdAt).toLocaleDateString()}</p>
       <div className="rich-text">

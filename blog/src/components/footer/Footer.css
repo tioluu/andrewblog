@@ -1,9 +1,10 @@
 /* src/Footer.css */
 .footer {
     background-color: black; /* Consistent with the navbar */
-    color: #bab25b;
+    color: #f9db79;;
     padding: 1rem;
     text-align: center; /* Center the text */
+    position: sticky;
   }
   
   .footer-content {
@@ -17,16 +18,16 @@
   }
   
   .social-links a {
-    color: #1a1917; /* Yellowish color for the links */
-    margin: 0 10px; /* Space out links */
+    color: white; 
+    margin: 0 10px;
     transition: color 0.3s ease;
   }
   
   .social-links a:hover {
-    color: #eaee0e; /* Change color on hover */
+    color: #f9db79; 
   }
   
   .social-links a svg {
-    font-size: 24px; /* Adjust the size of the icons */
+    font-size: 24px; 
   }
   

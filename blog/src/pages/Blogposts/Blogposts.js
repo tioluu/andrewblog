@@ -1,4 +1,3 @@
-// src/BlogPosts.js
 import React, { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { RichText } from '@graphcms/rich-text-react-renderer';
@@ -43,14 +42,14 @@ const BlogPosts = () => {
         <FullPost post={selectedPost} onBack={handleBack} />
       ) : (
         <>
-          <h1 className="blog-posts-title">Blog Posts</h1>
+          
           <div className="blog-posts-list">
             {data.posts.map(post => (
               <div key={post.id} className="blog-post-item" onClick={() => handleClick(post)}>
                 {post.featuredImage && (  // Check if the featuredImage exists before rendering
                   <img 
                     src={post.featuredImage.url} 
-                    alt={post.featuredImage.altText} 
+                    alt={post.title} 
                     className="blog-post-item-image" 
                   />
                 )}

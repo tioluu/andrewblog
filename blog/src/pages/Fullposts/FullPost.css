@@ -16,6 +16,11 @@
     color: #333;
     text-align: center;
   }
+
+  .full-post-image{
+    width: 750px;
+    height: 400px;
+  }
   
   .full-post-date {
     font-size: 1rem;
