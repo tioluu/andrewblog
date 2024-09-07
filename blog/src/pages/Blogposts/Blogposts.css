@@ -6,13 +6,6 @@
   border-radius: 12px;
 }
 
-.blog-posts-title {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #333;
-}
-
 .blog-posts-list {
   display: flex;
   flex-direction: column; /* Single column layout */
@@ -56,4 +49,9 @@
   margin-bottom: 20px; /* Increased margin for spacing */
   object-fit: cover;
   height: 300px; /* Set a fixed height for uniformity */
+}
+
+.blog-post-author{
+  text-align: right;
+  font-weight: 800;
 }

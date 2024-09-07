@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const GET_BLOG_POSTS = gql`
   {
-    posts {
+    posts(orderBy: createdAt_DESC) {
       id
       title
       excerpt
@@ -16,6 +16,9 @@ const GET_BLOG_POSTS = gql`
       }
       featuredImage {  
         url
+      }
+      author{
+        name
       }
     }
   }
@@ -75,7 +78,6 @@ const BlogPosts = () => {
             variants={pageVariants}
             transition={pageTransition}
           >
-            <h1 className="blog-posts-title">Blog Posts</h1>
             <div className="blog-posts-list">
               {data.posts.map(post => (
                 <div key={post.id} className="blog-post-item" onClick={() => handleClick(post)}>
@@ -87,7 +89,8 @@ const BlogPosts = () => {
                     />
                   )}
                   <h2 className="blog-post-item-title">{post.title}</h2>
-                  <p className="blog-post-item-excerpt">{post.excerpt}</p>
+                  <p className="blog-post-item-excerpt"> {post.excerpt}</p>
+                  <p className="blog-post-author">{post.author.name}</p>
                 </div>
               ))}
             </div>

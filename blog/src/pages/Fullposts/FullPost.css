@@ -3,53 +3,71 @@
   margin: 40px auto;
   padding: 20px;
 }
-    
-    .full-post-title {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: #333;
-      text-align: center;
-    }
 
-    .full-post-image {
-      max-width: 100%;
-      height: auto;
+.full-post-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+}
 
-    }
+.full-post-image {
+  max-width: 100%;
+  height: auto;
 
-    .full-post-date {
-      font-size: 1rem;
-      color: #777;
-      text-align: right;
-    }
+}
 
-    .rich-text {
-      line-height: 2.5;
-      font-size: larger;
-    }
+.full-post-date {
+  font-size: 1rem;
+  color: #777;
+  text-align: right;
+}
 
-    .back-button {
-      margin-bottom: 15px;
-      padding: 8px 12px;
-      background-color: white;
-      color: black;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      width: 20%;
-      font-family: "Zain", sans-serif;
-      font-weight: 400;
-      font-style: normal;
-    }
+.rich-text {
+  line-height: 2.5;
+  font-size: 1.3rem;
+}
 
-    .back-button:hover {
-      background-color: #0056b3;
-    }
-    @media (max-width: 768px) {
-      .full-post-image {
-        width: 100%;
-        height: auto;
-      }
-    }
-    /* You can add additional styles for rich text if desired */
+.back-button {
+  margin-bottom: 15px;
+  padding: 8px 12px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 20%;
+  font-family: "Zain", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.share-buttons a {
+  margin: 0 10px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.share-buttons a:hover {
+  color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .full-post-image {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* You can add additional styles for rich text if desired */

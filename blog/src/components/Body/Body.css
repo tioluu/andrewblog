@@ -60,11 +60,8 @@
 
 .posts-list {
     display: grid;
-    /* Grid for layout */
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    /* Responsive cards */
     gap: 15px;
-    /* Space between items */
     cursor: pointer;
 }
 
@@ -88,10 +85,17 @@
 .post-item-image {
     width: 100%;
     /* Responsive width */
-    height: auto;
+    height: 30%;
     /* Maintain aspect ratio */
     border-radius: 8px;
     /* Rounded corners */
+}
+
+.post-item-title{
+    text-align: center;
+}
+.post-item-author{
+    text-align: right;
 }
 
 @media (max-width: 768px) {

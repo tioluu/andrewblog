@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="footer-content">
         <p>© 2024 raMbleonAndrew. All rights reserved.</p>
         <div className="social-links">
-          <a href="https://github.com/andrewk0l" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/andrewk0l/andrewblog" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faGithub} size="lg" />
           </a>
           <a href="https://x.com/natkingkol_" target="_blank" rel="noopener noreferrer">

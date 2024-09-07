@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const GET_RECENT_POSTS = gql`
   {
-    posts {
+    posts(orderBy: createdAt_DESC) {
       id
       title
       excerpt
@@ -20,10 +20,12 @@ const GET_RECENT_POSTS = gql`
       featuredImage {  
         url
       }
+      author{
+        name
+      }
     }
   }
 `;
-
 const pageVariants = {
   initial: {
     opacity: 0,
@@ -93,24 +95,21 @@ const Body = () => {
             <div className="recent-posts-container">
               <h2 className="recent-posts-title">Latest Ramblings</h2>
               <div className="posts-list">
-                {data.posts.length === 0 ? (
-                  <p>No recent posts available.</p>
-                ) : (
-                  data.posts.map(post => (
-                    <div key={post.id} className="post-item" onClick={() => handleClick(post)}>
-                      {post.featuredImage && (
-                        <img
-                          src={post.featuredImage.url}
-                          alt={post.title}
-                          className="post-item-image"
-                        />
-                      )}
-                      <h3 className="post-item-title">{post.title}</h3>
-                      <p className="post-item-excerpt">{post.excerpt}</p>
-                    </div>
-                  ))
-                )}
-              </div>
+  {data.posts.slice(0, 4).map(post => (
+    <div key={post.id} className="post-item" onClick={() => handleClick(post)}>
+      {post.featuredImage && (
+        <img
+          src={post.featuredImage.url}
+          alt={post.title}
+          className="post-item-image"
+        />
+      )}
+      <h3 className="post-item-title">{post.title}</h3>
+      <p className="post-item-excerpt">{post.excerpt}</p>
+      <p className="blog-post-author">{post.author.name}</p>
+    </div>
+  ))}
+</div>
             </div>
           </motion.div>
         )}
