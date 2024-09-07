@@ -65,6 +65,7 @@
     /* Responsive cards */
     gap: 15px;
     /* Space between items */
+    cursor: pointer;
 }
 
 .post-item {

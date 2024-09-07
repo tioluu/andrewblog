@@ -1,3 +1,9 @@
+.full-post-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+    
     .full-post-title {
       font-size: 2.5rem;
       margin-bottom: 10px;
@@ -14,10 +20,12 @@
     .full-post-date {
       font-size: 1rem;
       color: #777;
-      text-align: center;
+      text-align: right;
     }
-    .rich-text{
+
+    .rich-text {
       line-height: 2.5;
+      font-size: larger;
     }
 
     .back-button {
@@ -30,17 +38,18 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
       width: 20%;
+      font-family: "Zain", sans-serif;
+      font-weight: 400;
+      font-style: normal;
     }
 
     .back-button:hover {
       background-color: #0056b3;
     }
-
-    @media (max-width: 768px){
-      .full-post-image{
-        width: 700px;
-        height: 300px
+    @media (max-width: 768px) {
+      .full-post-image {
+        width: 100%;
+        height: auto;
       }
     }
-
     /* You can add additional styles for rich text if desired */
