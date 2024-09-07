@@ -1,47 +1,46 @@
-/* src/FullPost.css */
-.full-post-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    height: calc(100vh - 80px); /* Full height minus margin */
-    overflow-y: auto; /* Enable vertical scroll if content overflows */
-  }
-  
-  .full-post-title {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    color: #333;
-    text-align: center;
-  }
+    .full-post-title {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #333;
+      text-align: center;
+    }
 
-  .full-post-image{
-    width: 750px;
-    height: 400px;
-  }
-  
-  .full-post-date {
-    font-size: 1rem;
-    color: #777;
-    text-align: center;
-  }
-  
-  .back-button {
-    margin-bottom: 15px;
-    padding: 10px 15px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .back-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* You can add additional styles for rich text if desired */
-  
+    .full-post-image {
+      max-width: 100%;
+      height: auto;
+
+    }
+
+    .full-post-date {
+      font-size: 1rem;
+      color: #777;
+      text-align: center;
+    }
+    .rich-text{
+      line-height: 2.5;
+    }
+
+    .back-button {
+      margin-bottom: 15px;
+      padding: 8px 12px;
+      background-color: white;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 20%;
+    }
+
+    .back-button:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 768px){
+      .full-post-image{
+        width: 700px;
+        height: 300px
+      }
+    }
+
+    /* You can add additional styles for rich text if desired */
