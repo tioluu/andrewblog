@@ -47,6 +47,7 @@ const FullPost = ({ post, onBack }) => {
         <a href="#" onClick={() => handleShare('twitter')}>
           <FontAwesomeIcon icon={faXTwitter} size="lg" />
         </a>
+        <h3>Share</h3>
         <a href="#" onClick={() => handleShare('facebook')}>
           <FontAwesomeIcon icon={faFacebook} size="lg" />
         </a>
