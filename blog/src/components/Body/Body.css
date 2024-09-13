@@ -106,11 +106,11 @@
 
     .image-container, .content-text{
         flex-direction: column;
-        width: 250px;
+        width: 100%;
     }
 
     .content-text{
-        width: 300px;
+        width: 100%;
     }
     .content-text p{
         font-size: small;

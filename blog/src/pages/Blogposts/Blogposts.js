@@ -3,7 +3,6 @@ import { useQuery, gql } from '@apollo/client';
 import FullPost from '../Fullposts/FullPost';
 import './Blogposts.css';
 import { motion, AnimatePresence } from 'framer-motion';
-
 const GET_BLOG_POSTS = gql`
   {
     posts(orderBy: createdAt_DESC) {
@@ -20,6 +19,7 @@ const GET_BLOG_POSTS = gql`
       author{
         name
       }
+    
     }
   }
 `;
@@ -51,6 +51,7 @@ const BlogPosts = () => {
   const handleBack = () => {
     setSelectedPost(null);
   };
+
 
   if (loading) return <p className="loading">Loading...</p>;
   if (error) return <p className="error">Error fetching posts: {error.message}</p>;

@@ -14,7 +14,7 @@ const FullPost = ({ post, onBack }) => {
 
   const shareUrl = window.location.href; // Get the current URL
   const shareTitle = post.title; // Get the post title
-  const shareText = `Check out this awesome post: ${shareTitle}`; // Create a share text
+  const shareText = `Check out my new post: ${shareTitle}`; // Create a share text
 
   const handleShare = (platform) => {
     let shareLink = '';
