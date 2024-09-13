@@ -38,7 +38,7 @@ const FullPost = ({ post, onBack }) => {
     <div className="full-post-container">
       <h1 className="full-post-title">{post.title}</h1>
       <p className="full-post-date">{new Date(post.createdAt).toLocaleDateString()}</p>
-      <img className='full-post-image' src={post.featuredImage.url} />
+      <img className='full-post-image' src={post.featuredImage.url} alt='' />
       <div className="rich-text">
         <RichText content={post.content.raw} />
       </div>
@@ -48,7 +48,7 @@ const FullPost = ({ post, onBack }) => {
           <FontAwesomeIcon icon={faXTwitter} size="lg" />
         </a>
         <h3>Share</h3>
-        <a href="#" onClick={() => handleShare('facebook')}>
+        <a href="" onClick={() => handleShare('facebook')}>
           <FontAwesomeIcon icon={faFacebook} size="lg" />
         </a>
       </div>

@@ -1,4 +1,3 @@
-// src/Body.js
 import React, { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import './Body.css';
@@ -83,7 +82,7 @@ const Body = () => {
           >
             <div className="main-content">
               <div className="image-container">
-                <img src={blogimg} alt="Blog Image" className="content-image" />
+                <img src={blogimg} alt="" className="content-image" />
               </div>
 
               <div className="content-text">
