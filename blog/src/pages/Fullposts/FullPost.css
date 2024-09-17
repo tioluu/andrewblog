@@ -2,6 +2,7 @@
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
+  background-color: white;
 }
 
 .full-post-title {
@@ -63,10 +64,26 @@
   color: #0056b3;
 }
 
+
 @media (max-width: 768px) {
   .full-post-image {
     width: 100%;
     height: auto;
+  }
+
+  .rich-text {
+    font-size: 13px;
+  }
+
+  .back-button {
+    font-size: 13px;
+  }
+
+  .full-post-date{
+    font-size: 7px;
+  }
+  .full-post-title{
+    font-size: 20px;
   }
 }
 
