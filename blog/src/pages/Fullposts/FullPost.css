@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
-  background-color: white;
+  background-color: inherit;
 }
 
 .full-post-title {
@@ -25,7 +25,7 @@
 }
 
 .rich-text {
-  line-height: 2.5;
+  line-height: 1.5;
   font-size: 1.3rem;
 }
 
