@@ -32,9 +32,7 @@ jobs:
     - name: Vercel Deployment
       uses: amondnet/vercel-action@v20  # Use the Vercel GitHub Action
       with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}  # Set Vercel token (stored in GitHub secrets)
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}  # Set Vercel org ID (stored in GitHub secrets)
-        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}  # Set Vercel project ID (stored in GitHub secrets)
+        vercel-token: ${{ secrets.VERCEL_SECRET }}  # Set Vercel token (stored in GitHub secrets)
         vercel-args: '--prod'  # Deploy to production (remove for preview deployments)
       env:
         VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}  # Make sure VERCEL_TOKEN is set in your GitHub Secrets
