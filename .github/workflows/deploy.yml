@@ -3,7 +3,10 @@ name: Vercel Deployment
 on:
   push:
     branches:
-      - main  # or your default branch
+      - tioluu-patch-1
+  pull_request:
+    branches:
+      main  
 
 jobs:
   deploy:
@@ -22,7 +25,7 @@ jobs:
 
       - name: Navigate to blog directory
         run: cd blog
-        
+
       # Install dependencies
       - name: Install dependencies
         run: npm install
