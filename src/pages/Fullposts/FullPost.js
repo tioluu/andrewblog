@@ -44,11 +44,11 @@ const FullPost = ({ post, onBack }) => {
       </div>
       <button className="back-button" onClick={onBack}>Back</button>
       <div className="share-buttons">
-        <a href="#" onClick={() => handleShare('twitter')}>
+        <a href="/" onClick={() => handleShare('twitter')}>
           <FontAwesomeIcon icon={faXTwitter} size="lg" />
         </a>
         <h3>Share</h3>
-        <a href="" onClick={() => handleShare('facebook')}>
+        <a href="/" onClick={() => handleShare('facebook')}>
           <FontAwesomeIcon icon={faFacebook} size="lg" />
         </a>
       </div>

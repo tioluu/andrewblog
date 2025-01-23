@@ -1,34 +1,38 @@
-name: Vercel Deployment
+name: Deploy to Vercel
 
 on:
   push:
     branches:
-      - main  # or your default branch
+      - tioluu-patch-1  # Trigger the deployment on push to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger the deployment on pull request to main
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use an Ubuntu runner
 
     steps:
-      # Checkout the code
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2  # Checkout the repository
 
-      # Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.20.4'  # Use your preferred version
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # Specify the Node.js version (you can change it if needed)
 
-      # Install dependencies
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: |
+        npm install  
 
-      # Deploy to Vercel
-      - name: Deploy to Vercel
-        run: |
-          npm install -g vercel
-          vercel --token ${{ secrets.VERCEL_SECRET }} --prod
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_SECRET }}
-          
+    - name: Build the project
+      run: |
+        npm run build  # Build the project (adjust this command if needed)
+
+    - name: Vercel Deployment
+      uses: amondnet/vercel-action@v20  
+      with:
+        vercel-token: ${{ secrets.VERCEL_SECRET }}  
+        vercel-args: '--prod --yes'  
+      env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}  
