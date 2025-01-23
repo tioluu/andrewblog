@@ -20,6 +20,7 @@ jobs:
       # Debug: List the directory structure to ensure 'blog' folder is present
       - name: List files in repository
         run: |
+          echo "Current directory structure:"
           ls -al
 
       # Set up Node.js
@@ -31,6 +32,7 @@ jobs:
       # Install dependencies in the blog directory
       - name: Install dependencies
         run: |
+          ls -al blog  # This will confirm the presence of the 'blog' folder
           cd blog
           npm install
         working-directory: ./blog
