@@ -6,7 +6,7 @@ on:
       - tioluu-patch-1
   pull_request:
     branches:
-      main  
+      - main  
 
 jobs:
   deploy:
@@ -24,7 +24,7 @@ jobs:
           node-version: '18.20.4'  # Use your preferred version
 
       - name: Navigate to blog directory
-        run: cd blog
+        run: cd ./blog
 
       # Install dependencies
       - name: Install dependencies
