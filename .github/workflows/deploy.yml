@@ -23,7 +23,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd /home/runner/work/andrewblog/andrewblog/blog && npm install  # Install the project dependencies
+        npm install  
 
     - name: Build the project
       run: |
