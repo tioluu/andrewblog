@@ -3,7 +3,7 @@ name: Deploy to Vercel
 on:
   push:
     branches:
-      - main  # Trigger the deployment on push to the main branch
+      - tioluu-patch-1  # Trigger the deployment on push to the main branch
   pull_request:
     branches:
       - main  # Trigger the deployment on pull request to main
