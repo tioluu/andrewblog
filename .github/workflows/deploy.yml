@@ -1,0 +1,8 @@
+name: Vercel Deployment
+
+on:
+  push:
+    branches:
+      - main  # or your default branch
+
+
