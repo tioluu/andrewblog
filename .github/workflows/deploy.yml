@@ -42,20 +42,19 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build  # Wait for the build job to complete
 
     steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: build/
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Vercel Deployment
-        uses: amondnet/vercel-action@v20  
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
         with:
           vercel-token: ${{ secrets.VERCEL_SECRET }}  
           vercel-args: '--prod --yes'  
         env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}  
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} 
           
