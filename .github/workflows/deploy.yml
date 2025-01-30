@@ -3,9 +3,9 @@ name: Deploy to Vercel
 on:
   pull_request:
     branches: [ "main" ]
-
   push:
-    branches: [ "test/**" ]
+    branches:
+      - test/**  
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
@@ -42,19 +42,20 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: build  
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build the project
-        run: npm run build
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
         with:
-          vercel-token: ${{ secrets.VERCEL_SECRET }}  
-          vercel-args: '--prod --yes'  
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} 
-          
+          name: build
+          path: build/
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Deploy to Vercel
+        run: vercel --token=${{ secrets.VERCEL_TOKEN }} --prod --yes
