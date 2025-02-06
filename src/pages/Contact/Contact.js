@@ -24,20 +24,28 @@ const Contact = () => {
     };
 
     const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        toast.info("Submitting...");
+    
         try {
-          await handleSubmit(e);
-          toast.success('Thank you for your message!');
-          setFormData({
-            firstName: '',
-            lastName: '',
-            email: '',
-            message: ''
-          });
+            const response = await fetch("http://localhost:5000/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+    
+            const data = await response.json();
+            if (response.ok) {
+                toast.success("Thank you for your message!");
+                setFormData({ firstName: "", lastName: "", email: "", message: "" });
+            } else {
+                toast.error(`Error: ${data.error}`);
+            }
         } catch (error) {
-          toast.error('There was an error submitting the form.');
-          console.error('Form submission error:', error);
+            toast.error("There was an error submitting the form.");
+            console.error("Form submission error:", error);
         }
-      };
+    };
     return (
         <div className="contact-form-container">
             <div className="contact-info">
