@@ -22,8 +22,8 @@ const pool = new Pool({
 app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
   
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: "All fields are required." });
+  if (!email || !message) {
+    return res.status(400).json({ error: "Email and message are required." });
   }
 
   try {
