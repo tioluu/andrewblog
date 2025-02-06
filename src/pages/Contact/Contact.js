@@ -85,7 +85,7 @@ const Contact = () => {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="message">Message</label>
+                    <label htmlFor="message">Message *</label>
                     <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows="5" required></textarea>
                     <ValidationError prefix="Message" field="message" errors={state.errors} />
                 </div>
