@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# ANDREWBLOG - Multi-Container Setup & CI/CD
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+ANDREWBLOG is a full-stack blog application that utilizes a **React frontend**, an **Express.js backend**, and a **PostgreSQL database**. This project is containerized using **Docker Compose** and features an automated **CI/CD workflow with GitHub Actions**.
 
-## Available Scripts
+## Tech Stack
+- **Frontend**: React (served on port 3000)
+- **Backend**: Express.js (served on port 5000)
+- **Database**: PostgreSQL (running in a Docker container)
+- **CI/CD**: GitHub Actions for automated testing and deployment
+- **Containerization**: Docker & Docker Compose
 
-In the project directory, you can run:
+## Local Development Setup
+### Prerequisites
+Ensure you have the following installed:
+- [Docker](https://docs.docker.com/get-docker/)
+- [Node.js](https://nodejs.org/) (for local testing)
 
-### `npm start`
+### 1. Clone the repository
+```sh
+ git clone https://github.com/yourusername/andrewblog.git
+ cd andrewblog
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2. Set Up Environment Variables
+Create a `.env` file in the `database/` folder and add:
+```
+POSTGRES_USER=your_username
+POSTGRES_PASSWORD=your_password
+POSTGRES_DB=andrewblog
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 3. Start Containers
+```sh
+docker compose up -d --build
+```
+This will:
+- Start the PostgreSQL database
+- Start the backend
+- Start the frontend
 
-### `npm test`
+### 4. Check Running Containers
+```sh
+docker ps
+```
+Ensure that the database, backend, and frontend containers are running.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 5. Access the Services
+- **Backend API**: http://localhost:5000
+- **Frontend App**: http://localhost:3000
+- **Database**: Connect using `localhost:5432`
 
-### `npm run build`
+### 6. Stop Containers
+```sh
+docker compose down
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## GitHub Actions - CI/CD Workflow
+This project uses GitHub Actions to automate testing and deployment.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Workflow Triggers:
+- Runs on **pull requests** to `main`
+- Runs on **push** to `test/**` branches
 
-### `npm run eject`
+### Workflow Steps:
+1. **Spin up services** (PostgreSQL, backend, frontend)
+2. **Wait for the backend to be ready**
+3. **Health check** backend & frontend
+4. **Run backend tests**
+5. **Shut down containers**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Fixing Common Issues
+#### "Port already allocated" Error
+If you see an error like:
+```sh
+Bind for 0.0.0.0:5432 failed: port is already allocated
+```
+Run the following to stop any existing PostgreSQL instances:
+```sh
+docker stop $(docker ps -q --filter "publish=5432")
+docker rm $(docker ps -aq --filter "publish=5432")
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### "Backend Failed to Start" in Workflow
+Ensure that the backend properly starts by checking:
+```sh
+curl http://localhost:5000/health
+```
+Modify `.github/workflows/ci.yml` to retry multiple times before failing:
+```yaml
+run: |
+  for i in {1..15}; do
+    if curl --silent --fail http://localhost:5000/health; then
+      echo "Backend is up!"
+      exit 0
+    fi
+    echo "Waiting for backend..."
+    sleep 5
+  done
+  echo "Backend failed to start"
+  exit 1
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Backend API Routes
+- **POST /contact** – Saves user messages (requires `email` and `message`)
 
-## Learn More
+## Running Backend Tests
+If tests exist, they can be run via:
+```sh
+docker compose run backend npm test
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Since no tests are defined yet, a temporary test script is included:
+```json
+"scripts": {
+  "test": "echo \"No tests available\" && exit 0",
+  "start": "node server.js"
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
