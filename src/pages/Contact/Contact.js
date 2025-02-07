@@ -7,15 +7,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
-    // Combine firstName and lastName into one 'name' field
-    const fullName = `${formData.firstName} ${formData.lastName}`;
-    
-    // Create a new object with 'name', 'email', and 'message'
-    const formDataWithName = {
-        name: fullName,
-        email: formData.email,
-        message: formData.message,
-    };
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        message: ''
+    });
 
     const [state, handleSubmit] = useForm("mvgpnadr"); 
 
@@ -30,11 +27,21 @@ const Contact = () => {
         e.preventDefault();
         toast.info("Submitting...");
     
+        // Combine firstName and lastName into one 'name' field
+        const fullName = `${formData.firstName} ${formData.lastName}`;
+        
+        // Create a new object with 'name', 'email', and 'message'
+        const formDataWithName = {
+            name: fullName,
+            email: formData.email,
+            message: formData.message,
+        };
+    
         try {
             const response = await fetch("http://localhost:5000/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(formDataWithName),
             });
     
             const data = await response.json();
@@ -49,6 +56,7 @@ const Contact = () => {
             console.error("Form submission error:", error);
         }
     };
+    
     return (
         <div className="contact-form-container">
             <div className="contact-info">
