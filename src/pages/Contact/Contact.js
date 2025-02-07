@@ -14,7 +14,7 @@ const Contact = () => {
         message: ''
     });
 
-    const [state, handleSubmit] = useForm("mvgpnadr"); // Replace with your Formspree form endpoint
+    const [state, handleSubmit] = useForm("mvgpnadr"); 
 
     const handleChange = (e) => {
         setFormData({
@@ -24,20 +24,39 @@ const Contact = () => {
     };
 
     const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        toast.info("Submitting...");
+    
+        // Combine firstName and lastName into one 'name' field
+        const fullName = `${formData.firstName} ${formData.lastName}`;
+        
+        // Create a new object with 'name', 'email', and 'message'
+        const formDataWithName = {
+            name: fullName,
+            email: formData.email,
+            message: formData.message,
+        };
+    
         try {
-          await handleSubmit(e);
-          toast.success('Thank you for your message!');
-          setFormData({
-            firstName: '',
-            lastName: '',
-            email: '',
-            message: ''
-          });
+            const response = await fetch("http://localhost:5000/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formDataWithName),
+            });
+    
+            const data = await response.json();
+            if (response.ok) {
+                toast.success("Thank you for your message!");
+                setFormData({ firstName: "", lastName: "", email: "", message: "" });
+            } else {
+                toast.error(`Error: ${data.error}`);
+            }
         } catch (error) {
-          toast.error('There was an error submitting the form.');
-          console.error('Form submission error:', error);
+            toast.error("There was an error submitting the form.");
+            console.error("Form submission error:", error);
         }
-      };
+    };
+    
     return (
         <div className="contact-form-container">
             <div className="contact-info">
@@ -77,7 +96,7 @@ const Contact = () => {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="message">Message</label>
+                    <label htmlFor="message">Message *</label>
                     <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows="5" required></textarea>
                     <ValidationError prefix="Message" field="message" errors={state.errors} />
                 </div>

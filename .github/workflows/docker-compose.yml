@@ -1,0 +1,61 @@
+name: Multi-Container CI/CD
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches:
+      - test/**  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: andrewblog
+        ports:
+          - 5432:5432
+        options: --health-cmd "pg_isready -U postgres" --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Check Running Services
+        run: docker ps -a
+
+      - name: Stop Conflicting PostgreSQL
+        run: docker stop $(docker ps -q --filter ancestor=postgres) || true
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Start Multi-Container App
+        run: docker compose up -d --build
+
+      - name: Wait for Backend to be Ready
+        run: |
+          for i in {1..15}; do
+            if curl --silent --fail http://localhost:5000/health; then
+              echo "Backend is up!"
+              exit 0
+            fi
+            echo "Waiting for backend..."
+            sleep 5
+          done
+          echo "Backend failed to start"
+          exit 1
+
+      - name: Run Frontend Health Check
+        run: curl --fail http://localhost:3000 || exit 1
+
+      - name: Run Backend Tests
+        run: docker compose run backend npm test || exit 1
+
+      - name: Shut Down Containers
+        run: docker compose down
