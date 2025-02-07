@@ -7,14 +7,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
-    const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        message: ''
-    });
+    // Combine firstName and lastName into one 'name' field
+    const fullName = `${formData.firstName} ${formData.lastName}`;
+    
+    // Create a new object with 'name', 'email', and 'message'
+    const formDataWithName = {
+        name: fullName,
+        email: formData.email,
+        message: formData.message,
+    };
 
-    const [state, handleSubmit] = useForm("mvgpnadr"); // Replace with your Formspree form endpoint
+    const [state, handleSubmit] = useForm("mvgpnadr"); 
 
     const handleChange = (e) => {
         setFormData({
