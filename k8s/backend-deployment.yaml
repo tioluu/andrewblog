@@ -7,6 +7,11 @@ spec:
   selector:
     matchLabels:
       app: backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -14,9 +19,28 @@ spec:
     spec:
       containers:
       - name: backend
-        image: your-backend-image:latest
+        image: andrewblog-backend:latest
         ports:
           - containerPort: 5000
         envFrom:
           - secretRef:
-            name: backend-secret 
+              name: backend-secret
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 10  
+          periodSeconds: 10        
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5  
+          periodSeconds: 10  
