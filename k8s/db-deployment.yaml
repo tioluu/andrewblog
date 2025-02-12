@@ -51,5 +51,5 @@ spec:
           persistentVolumeClaim:
             claimName: postgres-pvc
         - name: init-sql
-          configMap:
-            name: postgres-init-sql
+          secret:
+            secretName: postgres-init-sql
