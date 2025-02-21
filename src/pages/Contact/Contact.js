@@ -14,7 +14,7 @@ const Contact = () => {
         message: ''
     });
 
-    const [state, handleSubmit] = useForm("mvgpnadr"); 
+    const [state, handleSubmit] = useForm("mvgpnadr");
 
     const handleChange = (e) => {
         setFormData({
@@ -26,24 +26,24 @@ const Contact = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         toast.info("Submitting...");
-    
-        // Combine firstName and lastName into one 'name' field
+
         const fullName = `${formData.firstName} ${formData.lastName}`;
-        
-        // Create a new object with 'name', 'email', and 'message'
         const formDataWithName = {
             name: fullName,
             email: formData.email,
             message: formData.message,
         };
-    
+
+        // Use the environment variable for backend URL
+        const backendUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
         try {
-            const response = await fetch("http://localhost:5000/contact", {
+            const response = await fetch(`${backendUrl}/contact`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formDataWithName),
             });
-    
+
             const data = await response.json();
             if (response.ok) {
                 toast.success("Thank you for your message!");
@@ -56,7 +56,7 @@ const Contact = () => {
             console.error("Form submission error:", error);
         }
     };
-    
+
     return (
         <div className="contact-form-container">
             <div className="contact-info">
