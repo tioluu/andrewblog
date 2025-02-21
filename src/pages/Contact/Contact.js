@@ -35,7 +35,7 @@ const Contact = () => {
         };
 
         // Use the environment variable for backend URL
-        const backendUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+        const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
         try {
             const response = await fetch(`${backendUrl}/contact`, {
