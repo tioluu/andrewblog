@@ -2,4 +2,3 @@ version: 1.0
 resources:
   - stackName: blog
     templatePath: deploy/template.yml
-    parameters: {}
