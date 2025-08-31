@@ -1,4 +1,1 @@
-version: 1.0
-resources:
-  - stackName: blog
-    templatePath: deploy/template.yml
+template-file-path: deploy/template.yml
