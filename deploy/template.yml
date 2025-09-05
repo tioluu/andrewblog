@@ -6,6 +6,7 @@ Resources:
   
   SSHIngressRule:
     Type: AWS::EC2::SecurityGroupIngress
+    DependsOn: BlogSecurityGroup
     Properties:
       GroupId: !Ref BlogSecurityGroup
       IpProtocol: tcp
@@ -16,6 +17,7 @@ Resources:
 
   HTTPIngressRule:
     Type: AWS::EC2::SecurityGroupIngress
+    DependsOn: BlogSecurityGroup
     Properties:
       GroupId: !Ref BlogSecurityGroup
       IpProtocol: tcp
@@ -26,6 +28,7 @@ Resources:
 
   AppIngressRule3000:
     Type: AWS::EC2::SecurityGroupIngress
+    DependsOn: BlogSecurityGroup
     Properties:
       GroupId: !Ref BlogSecurityGroup
       IpProtocol: tcp
@@ -36,6 +39,7 @@ Resources:
 
   AppIngressRule5000:
     Type: AWS::EC2::SecurityGroupIngress
+    DependsOn: BlogSecurityGroup
     Properties:
       GroupId: !Ref BlogSecurityGroup
       IpProtocol: tcp
@@ -46,6 +50,7 @@ Resources:
 
   PostgresIngressRule:
     Type: AWS::EC2::SecurityGroupIngress
+    DependsOn: BlogSecurityGroup
     Properties:
       GroupId: !Ref BlogSecurityGroup
       IpProtocol: tcp
