@@ -1,3 +1,16 @@
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: The VPC where the security group will be created
+
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Name of an existing EC2 KeyPair for SSH access
+
+  AmiId:
+    Type: AWS::EC2::Image::Id
+    Description: AMI ID for the EC2 instance
+
 Resources:
   BlogSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -64,10 +77,10 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
-      ImageId: ami-0360c520857e3138f  # Ubuntu 24.04 LTS
+      ImageId: !Ref AmiId
+      KeyName: !Ref KeyName
       SecurityGroupIds:
         - !Ref BlogSecurityGroup
-      KeyName: auth
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash

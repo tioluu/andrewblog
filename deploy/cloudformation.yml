@@ -1,1 +1,5 @@
 template-file-path: deploy/template.yml
+Parameters:
+  VpcId: vpc-07974eb1e454fc182
+  KeyName: auth
+  AmiId: ami-0360c520857e3138f
