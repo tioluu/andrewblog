@@ -3,6 +3,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Allow HTTP, HTTPS, SSH, and application ports
+      VpcId: vpc-07974eb1e454fc182
   
   SSHIngressRule:
     Type: AWS::EC2::SecurityGroupIngress
