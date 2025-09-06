@@ -76,7 +76,6 @@ Resources:
   BlogInstance:
     Type: AWS::EC2::Instance
     Properties:
-      InstanceName: AndrewBlogInstance
       InstanceType: t2.micro
       ImageId: !Ref AmiId
       KeyName: !Ref KeyName
@@ -98,6 +97,9 @@ Resources:
           git clone https://github.com/tioluu/andrewblog.git
           cd andrewblog
           docker-compose up -d --build
+      Tags:
+      - Key: Name
+        Value: AndrewWBlogInstance
 
 Outputs:
   InstancePublicIP:
