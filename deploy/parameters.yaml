@@ -1,6 +1,0 @@
-- ParameterKey: VpcId
-  ParameterValue: vpc-07974eb1e454fc182
-- ParameterKey: KeyName
-  ParameterValue: auth
-- ParameterKey: AmiId
-  ParameterValue: ami-0360c520857e3138f
