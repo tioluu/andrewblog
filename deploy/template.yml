@@ -16,7 +16,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Allow HTTP, HTTPS, SSH, and application ports
-      VpcId: vpc-07974eb1e454fc182
+      VpcId: !Ref VpcId
   
   SSHIngressRule:
     Type: AWS::EC2::SecurityGroupIngress
@@ -99,7 +99,7 @@ Resources:
           docker-compose up -d --build
       Tags:
       - Key: Name
-        Value: AndrewWBlogInstance
+        Value: AndrewBlog
 
 Outputs:
   InstancePublicIP:
