@@ -1,0 +1,117 @@
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: The VPC where the security group will be created
+
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Name of an existing EC2 KeyPair for SSH access
+
+  AmiId:
+    Type: AWS::EC2::Image::Id
+    Description: AMI ID for the EC2 instance
+
+Resources:
+  BlogSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow HTTP, HTTPS, SSH, and application ports
+      VpcId: !Ref VpcId
+  
+  SSHIngressRule:
+    Type: AWS::EC2::SecurityGroupIngress
+    DependsOn: BlogSecurityGroup
+    Properties:
+      GroupId: !Ref BlogSecurityGroup
+      IpProtocol: tcp
+      FromPort: 22
+      ToPort: 22
+      CidrIp: 0.0.0.0/0
+      Description: Allow SSH access
+
+  HTTPIngressRule:
+    Type: AWS::EC2::SecurityGroupIngress
+    DependsOn: BlogSecurityGroup
+    Properties:
+      GroupId: !Ref BlogSecurityGroup
+      IpProtocol: tcp
+      FromPort: 80
+      ToPort: 80
+      CidrIp: 0.0.0.0/0
+      Description: Allow HTTP access
+
+  AppIngressRule3000:
+    Type: AWS::EC2::SecurityGroupIngress
+    DependsOn: BlogSecurityGroup
+    Properties:
+      GroupId: !Ref BlogSecurityGroup
+      IpProtocol: tcp
+      FromPort: 3000
+      ToPort: 3000
+      CidrIp: 0.0.0.0/0
+      Description: Allow frontend app on port 3000
+
+  AppIngressRule5000:
+    Type: AWS::EC2::SecurityGroupIngress
+    DependsOn: BlogSecurityGroup
+    Properties:
+      GroupId: !Ref BlogSecurityGroup
+      IpProtocol: tcp
+      FromPort: 5000
+      ToPort: 5000
+      CidrIp: 0.0.0.0/0
+      Description: Allow backend app on port 5000
+
+  PostgresIngressRule:
+    Type: AWS::EC2::SecurityGroupIngress
+    DependsOn: BlogSecurityGroup
+    Properties:
+      GroupId: !Ref BlogSecurityGroup
+      IpProtocol: tcp
+      FromPort: 5432
+      ToPort: 5432
+      CidrIp: 0.0.0.0/0
+      Description: Allow PostgreSQL database access
+
+  BlogInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: !Ref AmiId
+      KeyName: !Ref KeyName
+      SecurityGroupIds:
+        - !Ref BlogSecurityGroup
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          # Update and install packages
+          apt-get update -y
+          apt-get install -y docker.io git nginx
+
+          # Start and enable services
+          systemctl start nginx
+          systemctl enable nginx
+          systemctl start docker
+
+          # Add ubuntu user to docker group
+          usermod -aG docker ubuntu
+
+          # Install Docker Compose
+          curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
+
+          # Clone repo as ubuntu user
+          sudo -u ubuntu git clone -b test/aws-migration https://github.com/tioluu/andrewblog.git /home/ubuntu/andrewblog
+
+          # Start Docker Compose as ubuntu
+          cd /home/ubuntu/andrewblog
+          sudo -u ubuntu docker-compose up -d --build
+
+      Tags:
+      - Key: Name
+        Value: AndrewBlogInstance
+
+Outputs:
+  InstancePublicIP:
+    Description: Public IP of EC2 instance
+    Value: !GetAtt BlogInstance.PublicIp
