@@ -84,22 +84,32 @@ Resources:
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
+          # Update and install packages
           apt-get update -y
-          apt-get install -y docker.io git
-          apt-get install nginx -y
+          apt-get install -y docker.io git nginx
+
+          # Start and enable services
           systemctl start nginx
           systemctl enable nginx
           systemctl start docker
+
+          # Add ubuntu user to docker group
           usermod -aG docker ubuntu
+
+          # Install Docker Compose
           curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           chmod +x /usr/local/bin/docker-compose
-          cd /home/ubuntu
-          git clone https://github.com/tioluu/andrewblog.git
-          cd andrewblog
-          docker-compose up -d --build
-      Tags:
-      - Key: Name
-        Value: AndrewBlog
+
+          # Clone repo as ubuntu user
+          sudo -u ubuntu git clone https://github.com/tioluu/andrewblog.git /home/ubuntu/andrewblog
+
+          # Start Docker Compose as ubuntu
+          cd /home/ubuntu/andrewblog
+          sudo -u ubuntu docker-compose up -d --build
+
+            Tags:
+            - Key: Name
+              Value: AndrewBlogInstance
 
 Outputs:
   InstancePublicIP:
