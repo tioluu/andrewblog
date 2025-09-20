@@ -107,9 +107,9 @@ Resources:
           cd /home/ubuntu/andrewblog
           sudo -u ubuntu docker-compose up -d --build
 
-            Tags:
-            - Key: Name
-              Value: AndrewBlogInstance
+      Tags:
+      - Key: Name
+        Value: AndrewBlogInstance
 
 Outputs:
   InstancePublicIP:
