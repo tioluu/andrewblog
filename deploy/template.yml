@@ -101,7 +101,7 @@ Resources:
           chmod +x /usr/local/bin/docker-compose
 
           # Clone repo as ubuntu user
-          sudo -u ubuntu git clone https://github.com/tioluu/andrewblog.git /home/ubuntu/andrewblog
+          sudo -u ubuntu git clone -b test/aws-migration https://github.com/tioluu/andrewblog.git /home/ubuntu/andrewblog
 
           # Start Docker Compose as ubuntu
           cd /home/ubuntu/andrewblog
