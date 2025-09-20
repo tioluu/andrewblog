@@ -121,5 +121,3 @@ Since no tests are defined yet, a temporary test script is included:
   "start": "node server.js"
 }
 ```
-
----
