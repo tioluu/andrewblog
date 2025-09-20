@@ -1,5 +1,3 @@
-# ANDREWBLOG - Multi-Container Setup & CI/CD
-
 ## Overview
 ANDREWBLOG is a full-stack blog application that utilizes a **React frontend**, an **Express.js backend**, and a **PostgreSQL database**. This project is containerized using **Docker Compose** and features an automated **CI/CD workflow with GitHub Actions**.
 
